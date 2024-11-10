@@ -727,11 +727,22 @@ module ActiveRecord
       @strict_loading_mode == :all
     end
 
-    # Marks this record as read only.
+    # Prevents records from being persisted:
     #
     #   customer = Customer.first
     #   customer.readonly!
-    #   customer.save # Raises an ActiveRecord::ReadOnlyRecord
+    #   customer.update(name: 'New Name') # raises ActiveRecord::ReadOnlyRecord
+    #
+    # Note that, while you won't be able to persist changes, read-only records
+    # can be modified in memory:
+    #
+    #   customer.name = 'New name' # OK
+    #
+    # Freezing them would prevent that too:
+    #
+    #   customer.freeze
+    #   customer.name = 'New Name' # raises FrozenError
+    #
     def readonly!
       @readonly = true
     end
