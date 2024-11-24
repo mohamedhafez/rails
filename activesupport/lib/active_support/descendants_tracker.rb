@@ -19,7 +19,7 @@ module ActiveSupport
 
     @clear_disabled = false
 
-    if RubyFeatures::CLASS_SUBCLASSES
+    if RubyFeatures::CLASS_SUBCLASSES && false
       @@excluded_descendants = if RUBY_ENGINE == "ruby"
         # On MRI `ObjectSpace::WeakMap` keys are weak references.
         # So we can simply use WeakMap as a `Set`.
