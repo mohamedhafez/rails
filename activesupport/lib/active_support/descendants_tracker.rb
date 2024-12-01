@@ -7,7 +7,7 @@ module ActiveSupport
   # This module provides an internal implementation to track descendants
   # which is faster than iterating through ObjectSpace.
   module DescendantsTracker
-    VERSION = "simplified"
+    DESCENDANTS_TRACKER_VERSION = "simplified"
 
     @clear_disabled = false
 
