@@ -7,7 +7,7 @@ module ActiveSupport
   # This module provides an internal implementation to track descendants
   # which is faster than iterating through ObjectSpace.
   module DescendantsTracker
-    DESCENDANTS_TRACKER_VERSION = "simplified"
+    DESCENDANTS_TRACKER_VERSION = "accumulate_descendants"
 
     @clear_disabled = false
 
@@ -21,7 +21,16 @@ module ActiveSupport
       end
 
       def descendants(klass)
-        klass.descendants
+        arr = []
+        accumulate_descendants(klass, arr)
+        arr
+      end
+
+      def accumulate_descendants(klass, acc)
+        klass.subclasses.each do |direct_descendant|
+          acc << direct_descendant
+          accumulate_descendants(direct_descendant, acc)
+        end
       end
 
       def clear(classes) # :nodoc:
@@ -34,7 +43,7 @@ module ActiveSupport
     end
 
     def descendants
-      subclasses.concat(subclasses.flat_map(&:descendants))
+      DescendantsTracker.descendants(self)
     end
   end
 end
