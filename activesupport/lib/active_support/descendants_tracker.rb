@@ -34,7 +34,11 @@ module ActiveSupport
     end
 
     def descendants
-      subclasses(true)
+      jrubys_subclasses(true)
     end
   end
+end
+
+class Class
+  alias jrubys_subclasses subclasses
 end
