@@ -7,7 +7,7 @@ module ActiveSupport
   # This module provides an internal implementation to track descendants
   # which is faster than iterating through ObjectSpace.
   module DescendantsTracker
-    DESCENDANTS_TRACKER_VERSION = "simplified"
+    DESCENDANTS_TRACKER_VERSION = "subclasses_true"
 
     @clear_disabled = false
 
@@ -34,7 +34,7 @@ module ActiveSupport
     end
 
     def descendants
-      subclasses.concat(subclasses.flat_map(&:descendants))
+      subclasses(true)
     end
   end
 end
