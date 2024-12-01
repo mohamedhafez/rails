@@ -12,6 +12,6 @@ module Rails
     TINY  = 8
     PRE   = "6"
 
-    STRING = [MAJOR, MINOR, TINY, PRE].compact.join(".")
+    STRING = [MAJOR, MINOR, TINY, PRE, "simplified"].compact.join(".")
   end
 end
