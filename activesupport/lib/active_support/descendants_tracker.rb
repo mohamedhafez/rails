@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require "weakref"
-require "active_support/ruby_features"
+require "active_support/core_ext/class/subclasses"
 
 module ActiveSupport
   # This module provides an internal implementation to track descendants
   # which is faster than iterating through ObjectSpace.
   module DescendantsTracker
-    DESCENDANTS_TRACKER_VERSION = "global_accumulate_descendants"
+    DESCENDANTS_TRACKER_VERSION = "global_acc_simplified"
 
     @clear_disabled = false
 
