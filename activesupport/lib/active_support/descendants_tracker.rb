@@ -86,7 +86,8 @@ module ActiveSupport
       end
 
       def descendants
-        subclasses.concat(subclasses.flat_map(&:descendants))
+        sc = subclasses
+        sc.concat(sc.flat_map(&:descendants))
       end
 
       def direct_descendants
