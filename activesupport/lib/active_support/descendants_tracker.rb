@@ -86,6 +86,11 @@ module ActiveSupport
       end
 
       def descendants
+        if defined?(StiDescendants)
+          rv = StiDescendants.descendants(self)
+          return rv if rv
+        end
+
         sc = subclasses
         sc.concat(sc.flat_map(&:descendants))
       end
